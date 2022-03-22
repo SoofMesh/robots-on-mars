@@ -1,0 +1,87 @@
+*{
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+.header{
+    height: 350px;
+    width: vw;
+    background-color: rgb(3, 5, 41);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+}
+.header img{
+    height: 250px;
+    width: 100%;
+}
+.header div{
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+}
+.header h1{
+    font-family: 'sans-serif, Segoe UI', Tahoma, Geneva, Verdana ;
+    font-size: xx-large;
+    color:white;
+}
+
+.container{
+    height: 350px;
+    width: vw;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 70px;
+    
+}
+#sendInstructions{
+    background-color: orangered;
+    color: azure;
+    border-radius: 6px;
+    width: 35%;
+    height: 40px;
+}
+form input{
+    border: 4px solid gray;
+    border-radius: 2rem;
+    font-size: large;
+}
+.container input{
+    height: 3rem;
+    width: 20rem;
+    margin-bottom: 5px;
+    color: black;
+}
+form button{
+    height: 4rem;
+    width: 4rem;
+    margin-right: 10px;
+    background-color: orangered;
+    color:black;
+    border: 4px solid grey;
+    border-radius: 6px 6px 6px 6px;
+    background-color: goldenrod;
+}
+.container label{
+    height: 30px;
+    width: 20px;
+    border: 2px solid grey;
+    border-radius: 4px 4px 4px 4px;
+    background-color: goldenrod;
+}
+.container div{
+    text-align: center;
+}
+#rowQuantity, #colQuantity{
+    height: 2rem;
+    width: 6rem;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+form{
+    background-color: rgb(3, 5, 41);
+    color: rgb(72, 80, 82);
+}

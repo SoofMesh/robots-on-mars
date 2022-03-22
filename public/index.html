@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robots</title>
+    <link rel="stylesheet" href="index.css">    
+</head>
+<body>
+    <div class="header">
+        <img src="./src/1.jpg"/>
+        <div><h1>Robots are Listening...</h1></div>
+    </div>
+        
+        <form id="robots">
+            <div style="display: flex; justify-content: center;">
+                <label for="rowQuantity"><h3>Grid-Rows (1 to 50):</h3></label>
+                <input type="number" id="rowQuantity" name="quantity" min="1" max="50" required>
+
+                <label for="colQuantity"><h3>Grid-Cols (1 to 50)</h3>:</label>
+                <input type="number" id="colQuantity" name="quantity" min="1" max="50" required>
+            </div>
+            <div class="container">                        
+                <div>                    
+                    <h1>Robot-1</h1>                    
+                    <div><input type="text" id="orientation1" autocomplete="off" placeholder="Orientation with single space" required></div>
+                    <div><input type="text" id="instructions1" autocomplete="off" placeholder="Instructions" required disabled></div>
+                    <h3>Instructions</h3><button id="left1">Left</button><button id="right1">Right</button><button id="forward1">Forward</button>
+                    <br/><br/>
+                    <label id="final_Orient1"></label>                
+                </div>
+
+                <div>
+                    <h1>Robot-2</h1>                    
+                    <div><input type="text" id="orientation2" autocomplete="off" placeholder="Orientation with single space" required></div>
+                    <div><input type="text" id="instructions2" autocomplete="off" placeholder="Instructions" required disabled></div>
+                    <h3>Instructions</h3><button id="left2">Left</button><button id="right2">Right</button><button id="forward2">Forward</button>
+                    <br/><br/>
+                    <label id="final_Orient2"></label>
+                    
+                </div>
+                <div>
+                    <h1>Robot-3</h1>                    
+                    <div><input type="text" id="orientation3" autocomplete="off" placeholder="Orientation with single space" required></div>
+                    <div><input type="text" id="instructions3" autocomplete="off" placeholder="Instructions" required disabled></div>
+                    <h3>Instructions</h3><button id="left3">Left</button><button id="right3">Right</button><button id="forward3">Forward</button>
+                    <br/><br/>
+                    <label id="final_Orient3"></label>
+                </div>
+            
+            </div>
+
+                <div style="display: flex; justify-content: center;"><input type="submit" id="sendInstructions" value="Send All"></div>          
+        </form>       
+
+    <script>
+        
+        const instructions1 = document.getElementById('instructions1');
+        const left1 = document.getElementById('left1');        
+        left1.addEventListener('click', (e)=>{
+            e.preventDefault();
+            instructions1.focus();
+            instructions1.value += "L";
+        });
+
+        const right1 = document.getElementById('right1');
+        right1.addEventListener('click', (e)=>{
+            e.preventDefault();
+            instructions1.focus();
+            instructions1.value += "R"
+        });
+
+        const forward1 = document.getElementById('forward1');
+        forward1.addEventListener('click', (e)=>{
+            e.preventDefault();
+            instructions1.focus();
+            instructions1.value += "F"
+        });
+
+        const instructions2 = document.getElementById('instructions2');
+        const left2 = document.getElementById('left2');        
+        left2.addEventListener('click', (e)=>{
+            e.preventDefault();
+            instructions2.focus();
+            instructions2.value += "L";
+        });
+
+        const right2 = document.getElementById('right2');
+        right2.addEventListener('click', (e)=>{
+            e.preventDefault();
+            instructions2.focus();
+            instructions2.value += "R";
+        });
+
+        const forward2 = document.getElementById('forward2');
+        forward2.addEventListener('click', (e)=>{
+            e.preventDefault();
+            instructions2.focus();
+            instructions2.value += "F";
+        });
+
+        const instructions3 = document.getElementById('instructions3');
+        const left3 = document.getElementById('left3');        
+        left3.addEventListener('click', (e)=>{
+            e.preventDefault();
+            instructions3.focus();
+            instructions3.value += "L";
+        });
+
+        const right3 = document.getElementById('right3');
+        right3.addEventListener('click', (e)=>{
+            e.preventDefault();
+            instructions3.focus();
+            instructions3.value += "R";
+        });
+
+        const forward3 = document.getElementById('forward3');
+        forward3.addEventListener('click', (e)=>{
+            e.preventDefault();
+            instructions3.focus();
+            instructions3.value += "F";
+        });
+
+        
+
+        const form = document.getElementById('robots');
+        form.addEventListener('submit', sendOrders);
+        
+
+        async function sendOrders(event){
+            event.preventDefault();   
+
+           
+
+            const gridSize = document.getElementById('rowQuantity').value + ' ' + document.getElementById('colQuantity').value;
+            const orientation1 = document.getElementById('orientation1').value;
+            const instructions1 = document.getElementById('instructions1').value;
+
+            
+            const orientation2 = document.getElementById('orientation2').value;
+            const instructions2 = document.getElementById('instructions2').value;
+
+            
+            const orientation3 = document.getElementById('orientation3').value;
+            const instructions3 = document.getElementById('instructions3').value;
+
+            const initlabel1 = document.getElementById("init_Orient1");
+            const initlabel2 = document.getElementById("init_Orient2");
+            const initlabel3 = document.getElementById("init_Orient3");
+
+            const finallabel1 = document.getElementById("final_Orient1");
+            const finallabel2 = document.getElementById("final_Orient2");
+            const finallabel3 = document.getElementById("final_Orient3");
+            
+            
+            const result = await fetch("https://robots-on-mars-2.herokuapp.com/orderRobot", {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({gridSize: gridSize.split(' '), robots: [{                    
+                    orientation: orientation1.split(' '),
+                    instructions: instructions1.split('')                                                                                                                      
+                },
+                {
+                    orientation: orientation2.split(' '),
+                    instructions: instructions2.split('')
+                },
+                {
+                    orientation: orientation3.split(' '),
+                    instructions: instructions3.split('')
+                }
+            ]})                
+            }).then(res=>res.json());   
+                
+                if(result[0].isLost){
+                    finallabel1.innerHTML = result[0].X + " " + result[0].Y + " " + result[0].O + " " + 'Lost' 
+                }
+                else{
+                    finallabel1.innerHTML = result[0].X + " " + result[0].Y + " " + result[0].O
+                }
+                if(result[1].isLost){
+                    finallabel2.innerHTML = result[1].X + " " + result[1].Y + " " + result[1].O + " " + 'Lost' 
+                }
+                else{
+                    finallabel2.innerHTML = result[1].X + " " + result[1].Y + " " + result[1].O
+                }
+                if(result[2].isLost){
+                    finallabel3.innerHTML = result[2].X + " " + result[2].Y + " " + result[2].O + " " + 'Lost' 
+                }
+                else{
+                    finallabel3.innerHTML = result[2].X + " " + result[2].Y + " " + result[2].O
+                }
+        }
+    </script>
+</body>
+</html>
